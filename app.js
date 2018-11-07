@@ -9,10 +9,10 @@ GAME RULES:
 
 */
 
-
-const scores = [0,0];
-const roundScore = 0;
-const activePlayer = 0;
+let scores, roundScore, activePlayer;
+scores = [0,0];
+roundScore = 0;
+activePlayer = 0;
 
 
 document.getElementById('score-0').textContent = '0'
@@ -26,13 +26,22 @@ document.querySelector('.dice').style.display = 'none';
 
 document.querySelector('.btn-roll').addEventListener('click', ()=>{
 	// We need a random number
-	const dice = Math.floor(Math.random()*7);
+	const dice = Math.floor(Math.random()*6)+1;
+	console.log(dice)
 	// display the result
 	let die = document.querySelector('.dice');
 	die.style.display = 'block';
 	die.src = 'dice-' + dice + '.png';
 	// update the ruond score IF the rolled number was not 1
+	if (dice !== 1) {
+		// Add the score
+		roundScore += dice;
+		document.querySelector('#current-' + activePlayer).textContent = roundScore; 
+	} else {
+		if (activePlayer == 0) {
+			activePlayer =1;
+		} else {
+			activePlayer = 0;
+		}
+	}
 })
-
-
-
