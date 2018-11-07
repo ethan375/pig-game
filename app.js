@@ -38,10 +38,6 @@ document.querySelector('.btn-roll').addEventListener('click', ()=>{
 		roundScore += dice;
 		document.querySelector('#current-' + activePlayer).textContent = roundScore; 
 	} else {
-		if (activePlayer == 0) {
-			activePlayer =1;
-		} else {
-			activePlayer = 0;
-		}
+		activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
 	}
 })
