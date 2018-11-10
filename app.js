@@ -57,9 +57,6 @@ document.querySelector('.btn-hold').addEventListener('click', ()=>{
 	playerScore.innerHTML = scores[activePlayer];
 
 	//check if player won the game else change player
-	if (scores[activePlayer] >= 100) {
-		document.querySelector('#name-' + activePlayer).innerHTML = 'WINNER!';
-	} else {
-		nextPlayer()
-	}
+	//check if player won the game else change player
+	scores[activePlayer] >= 100 ? document.querySelector('#name-' + activePlayer).innerHTML = 'WINNER!' : nextPlayer();
 })
