@@ -50,18 +50,16 @@ document.querySelector('.btn-roll').addEventListener('click', ()=>{
 
 document.querySelector('.btn-hold').addEventListener('click', ()=>{
 	//add round score to scores array
-	if (activePlayer == 0) {
-		scores[activePlayer] += roundScore;
-	} else {
-		scores[activePlayer] += roundScore;
-	}
+	scores[activePlayer] += roundScore;
 
+	//update the player score on the ui
+	let playerScore = document.getElementById('score-' + activePlayer);
+	playerScore.innerHTML = scores[activePlayer];
+
+	//check if player won the game else change player
 	if (scores[activePlayer] >= 100) {
 		document.querySelector('#name-' + activePlayer).innerHTML = 'WINNER!';
 	} else {
 		nextPlayer()
 	}
-
-	let playerScore = document.getElementById('score-' + activePlayer);
-	playerScore.innerHTML = scores[activePlayer];
 })
