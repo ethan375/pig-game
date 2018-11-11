@@ -16,7 +16,7 @@ Challenges:
 3: add another die to the game. player will loose round score if either of them are a 1
 
 */
-let scores, roundScore, activePlayer, gameState, winningScore;
+let scores, roundScore, activePlayer, gameState, winningScore, previousRoll, currentRoll;
 
 
 
@@ -64,6 +64,16 @@ document.querySelector('.btn-roll').addEventListener('click', ()=>{
 		let die = document.querySelector('.dice');
 		die.style.display = 'block';
 		die.src = 'dice-' + dice + '.png';
+
+		//We need to keep track of the current dice roll and the previous 
+		previousRoll = currentRoll;
+		currentRoll = dice;
+		if (previousRoll == 6 && currentRoll == 6) {
+			scores[activePlayer] = 0;
+			document.getElementById('score-' + activePlayer).innerHTML = scores[activePlayer];
+			nextPlayer();
+		}
+
 		// update the ruond score IF the rolled number was not 1
 		if (dice !== 1) {
 			// Add the score
