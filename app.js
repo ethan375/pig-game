@@ -1,4 +1,4 @@
-/*
+ /*
 GAME RULES:
 
 - The game has 2 players, playing in rounds
@@ -9,17 +9,30 @@ GAME RULES:
 
 */
 
-let scores, roundScore, activePlayer;
-scores = [0,0];
-roundScore = 0;
-activePlayer = 0;
+let scores, roundScore, activePlayer, gameState;
 
-document.getElementById('score-0').textContent = '0'
-document.getElementById('score-1').textContent = '0'
-document.getElementById('current-0').textContent = '0'
-document.getElementById('current-1').textContent = '0'
-document.querySelector('.dice').style.display = 'none';
+gameState = true;
 
+init()
+function init(){
+	scores = [0,0];
+	roundScore = 0;
+	activePlayer = 0;
+
+	document.getElementById('score-0').textContent = '0';
+	document.getElementById('score-1').textContent = '0';
+	document.getElementById('current-0').textContent = '0';
+	document.getElementById('current-1').textContent = '0';
+	document.querySelector('.dice').style.display = 'none';
+	document.getElementById('name-0').innerHTML = 'Player 1';
+	document.getElementById('name-1').innerHTML = 'Player 2';
+	document.querySelector('.player-0-panel').classList.remove('winner');
+	document.querySelector('.player-1-panel').classList.remove('winner');
+	document.querySelector('.player-0-panel').classList.remove('active');
+	document.querySelector('.player-1-panel').classList.remove('active');
+	document.querySelector('.player-0-panel').classList.add('active');
+
+}
 
 function nextPlayer(){
 	document.querySelector('.player-' + activePlayer + '-panel').classList.toggle('active');
@@ -30,8 +43,13 @@ function nextPlayer(){
 	document.querySelector('.dice').style.display = 'none';
 }
 
+document.querySelector('.btn-new').addEventListener('click', init);
+
 
 document.querySelector('.btn-roll').addEventListener('click', ()=>{
+	if (gameState == false) {
+		
+	}
 	// We need a random number
 	const dice = Math.floor(Math.random()*6)+1;
 	// display the result
@@ -57,6 +75,10 @@ document.querySelector('.btn-hold').addEventListener('click', ()=>{
 	playerScore.innerHTML = scores[activePlayer];
 
 	//check if player won the game else change player
-	//check if player won the game else change player
-	scores[activePlayer] >= 100 ? document.querySelector('#name-' + activePlayer).innerHTML = 'WINNER!' : nextPlayer();
+	if (scores[activePlayer] >= 100) {
+		document.querySelector('#name-' + activePlayer).innerHTML = 'WINNER!'
+		gameState = false;
+	} else {
+		nextPlayer();
+	}
 })
