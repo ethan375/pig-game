@@ -90,7 +90,7 @@ document.querySelector('.btn-hold').addEventListener('click', ()=>{
 		//add round score to scores array
 		scores[activePlayer] += roundScore;
 
-		//update the player score on the ui
+		//update the player score on the ui 
 		let playerScore = document.getElementById('score-' + activePlayer);
 		playerScore.innerHTML = scores[activePlayer];
 
