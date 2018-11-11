@@ -47,8 +47,10 @@ document.querySelector('.btn-new').addEventListener('click', init);
 
 
 document.querySelector('.btn-roll').addEventListener('click', ()=>{
+	let modal = document.querySelector('.modal');
+	let close = document.querySelector('.close');
 	if (gameState == false) {
-		
+		modal.style.display = block;
 	}
 	// We need a random number
 	const dice = Math.floor(Math.random()*6)+1;
@@ -75,7 +77,7 @@ document.querySelector('.btn-hold').addEventListener('click', ()=>{
 	playerScore.innerHTML = scores[activePlayer];
 
 	//check if player won the game else change player
-	if (scores[activePlayer] >= 100) {
+	if (scores[activePlayer] >= 10) {
 		document.querySelector('#name-' + activePlayer).innerHTML = 'WINNER!'
 		gameState = false;
 	} else {
