@@ -16,9 +16,14 @@ Challenges:
 3: add another die to the game. player will loose round score if either of them are a 1
 
 */
-let scores, roundScore, activePlayer, gameState, winningScore, previousRoll, currentRoll;
+let scores, roundScore, activePlayer, gameState, winningScore, previousRoll, currentRoll, rules;
 
-
+alert("Game rules:\n- The game has 2 players, playing in rounds\n \n \
+- In each turn, a player rolls a dice as many times as he whishes. Each result get added to his ROUND score\n \n \
+- BUT, if the player rolls a 1, all his ROUND score gets lost. After that, it's the next player's turn\n \n \
+- The player can choose to 'Hold', which means that his ROUND score gets added to his GLBAL score. After that, it's the next player's turn\n \n \
+- The first player to reach the score specified points on GLOBAL score wins the game\n \n \
+")
 
 init()
 function init(){
