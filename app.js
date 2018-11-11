@@ -9,15 +9,25 @@ GAME RULES:
 
 */
 
-let scores, roundScore, activePlayer, gameState;
+/*
+Challenges:
+1: A player looses their entire score if they roll 6 twice in a row 
+2: add an input field so players can change the winning score 
+3: add another die to the game. player will loose round score if either of them are a 1
 
-gameState = true;
+*/
+let scores, roundScore, activePlayer, gameState, winningScore;
+
+
 
 init()
 function init(){
 	scores = [0,0];
 	roundScore = 0;
 	activePlayer = 0;
+	gameState = true;
+
+	winningScore = prompt("What would you like to set the winning score to? Please enter a number");
 
 	document.getElementById('score-0').textContent = '0';
 	document.getElementById('score-1').textContent = '0';
@@ -47,40 +57,39 @@ document.querySelector('.btn-new').addEventListener('click', init);
 
 
 document.querySelector('.btn-roll').addEventListener('click', ()=>{
-	let modal = document.querySelector('.modal');
-	let close = document.querySelector('.close');
-	if (gameState == false) {
-		modal.style.display = block;
-	}
-	// We need a random number
-	const dice = Math.floor(Math.random()*6)+1;
-	// display the result
-	let die = document.querySelector('.dice');
-	die.style.display = 'block';
-	die.src = 'dice-' + dice + '.png';
-	// update the ruond score IF the rolled number was not 1
-	if (dice !== 1) {
-		// Add the score
-		roundScore += dice;
-		document.querySelector('#current-' + activePlayer).textContent = roundScore; 
-	} else {
-		nextPlayer()
+	if (gameState) {
+		// We need a random number
+		const dice = Math.floor(Math.random()*6)+1;
+		// display the result
+		let die = document.querySelector('.dice');
+		die.style.display = 'block';
+		die.src = 'dice-' + dice + '.png';
+		// update the ruond score IF the rolled number was not 1
+		if (dice !== 1) {
+			// Add the score
+			roundScore += dice;
+			document.querySelector('#current-' + activePlayer).textContent = roundScore; 
+		} else {
+			nextPlayer()
+		}
 	}
 })
 
 document.querySelector('.btn-hold').addEventListener('click', ()=>{
-	//add round score to scores array
-	scores[activePlayer] += roundScore;
+	if (gameState) {
+		//add round score to scores array
+		scores[activePlayer] += roundScore;
 
-	//update the player score on the ui
-	let playerScore = document.getElementById('score-' + activePlayer);
-	playerScore.innerHTML = scores[activePlayer];
+		//update the player score on the ui
+		let playerScore = document.getElementById('score-' + activePlayer);
+		playerScore.innerHTML = scores[activePlayer];
 
-	//check if player won the game else change player
-	if (scores[activePlayer] >= 10) {
-		document.querySelector('#name-' + activePlayer).innerHTML = 'WINNER!'
-		gameState = false;
-	} else {
-		nextPlayer();
+		//check if player won the game else change player
+		if (scores[activePlayer] >= winningScore) {
+			document.querySelector('#name-' + activePlayer).innerHTML = 'WINNER!'
+			gameState = false;
+		} else {
+			nextPlayer();
+		}
 	}
 })
